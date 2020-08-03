@@ -4,7 +4,7 @@
 [ext_resource path="res://MainMenu.gd" type="Script" id=2]
 [ext_resource path="res://fade_in/FadeIn.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Fonts/overseer/Overseer.otf" type="DynamicFontData" id=4]
-[ext_resource path="res://Assets/FOS_Limit_Loading_Screen.jpg" type="Texture" id=5]
+[ext_resource path="res://Assets/background0.jpg" type="Texture" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -51,8 +51,8 @@ font_data = ExtResource( 4 )
 script = ExtResource( 2 )
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 960.385, 540.528 )
-scale = Vector2( 1.43934, 1.4393 )
+position = Vector2( 1528.26, 844.594 )
+scale = Vector2( 0.587957, 0.628457 )
 texture = ExtResource( 5 )
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -95,5 +95,13 @@ NUCLEAR WINTER"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TransitionBackground" type="Timer" parent="."]
+wait_time = 8.0
+autostart = true
+__meta__ = {
+"_editor_description_": "Used to transition background sprite image"
+}
 [connection signal="item_activated" from="PanelContainer/ItemList" to="PanelContainer/ItemList" method="_on_ItemList_item_activated"]
 [connection signal="fade_finished" from="FadeIn" to="PanelContainer/ItemList" method="_on_FadeIn_fade_finished"]
+[connection signal="timeout" from="TransitionBackground" to="." method="_on_TransitionBackground_timeout"]
