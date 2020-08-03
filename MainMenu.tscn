@@ -1,0 +1,81 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://ItemList.gd" type="Script" id=1]
+[ext_resource path="res://MainMenu.gd" type="Script" id=2]
+[ext_resource path="res://fade_in/FadeIn.tscn" type="PackedScene" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="Theme" id=2]
+ItemList/colors/font_color = Color( 0.63, 0.63, 0.63, 1 )
+ItemList/colors/font_color_selected = Color( 1, 1, 1, 1 )
+ItemList/colors/guide_color = Color( 0, 0, 0, 0.1 )
+ItemList/constants/hseparation = 4
+ItemList/constants/icon_margin = 4
+ItemList/constants/line_separation = 2
+ItemList/constants/vseparation = 2
+ItemList/fonts/font = null
+ItemList/styles/bg = null
+ItemList/styles/bg_focus = null
+ItemList/styles/cursor = null
+ItemList/styles/cursor_unfocused = null
+ItemList/styles/selected = null
+ItemList/styles/selected_focus = null
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.603922, 0.113725, 0.627451, 0.411765 )
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://Assets/Fonts/arial.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 48
+outline_color = Color( 0.866667, 0.729412, 0.52549, 1 )
+extra_spacing_top = 5
+extra_spacing_bottom = 5
+extra_spacing_char = 2
+font_data = SubResource( 5 )
+
+[node name="MainMenu" type="Node"]
+script = ExtResource( 2 )
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.00392157, 0.00392157, 0.00392157, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_left = 0.749662
+anchor_top = 0.30631
+anchor_right = 0.886641
+anchor_bottom = 0.66094
+size_flags_vertical = 9
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="ItemList" type="ItemList" parent="PanelContainer"]
+margin_right = 263.0
+margin_bottom = 426.0
+theme = SubResource( 2 )
+custom_styles/selected_focus = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+items = [ "Continue", null, false, "New Game", null, false, "Load", null, false, "Settings", null, false, "Credits", null, false, "Quit", null, false ]
+auto_height = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FadeIn" parent="." instance=ExtResource( 3 )]
+visible = false
+[connection signal="item_activated" from="PanelContainer/ItemList" to="PanelContainer/ItemList" method="_on_ItemList_item_activated"]
+[connection signal="fade_finished" from="FadeIn" to="PanelContainer/ItemList" method="_on_FadeIn_fade_finished"]
